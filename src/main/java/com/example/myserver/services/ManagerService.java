@@ -45,16 +45,6 @@ public class ManagerService extends ClientService implements Loginable {
 
     //=================== updating  methods ==================\\
     public void updateCompany(Company company) throws Exception {
-        // ERROR:
-        //Optional<Company> comp = Optional.ofNullable(compRepo.findById(company.getId()).orElseThrow(CompanyNotFoundException::new));
-
-        //        if ((comp.get().getName()).equals(company.getName()) &&
-        //                comp.get().getId() == company.getId()) {
-
-
-//            compRepo.save(company);
-//        } else
-//            throw new CannotupdateCompanyNameOrIdException();
         if (!compRepo.existsById(company.getId())) {
             throw new CompanyNotFoundException();
         }
@@ -63,12 +53,10 @@ public class ManagerService extends ClientService implements Loginable {
 
 
     public void updateCustomer(Customer customer) throws Exception {
-        Optional<Customer> cust = Optional.ofNullable(custRepo.findById(customer.getId()).orElseThrow(CustomerNotFoundException::new));
-        if ((cust.get().getId() == customer.getId())
-        ) {
-            custRepo.save(customer);
-        } else
-            throw new CannotupdateCustomerIdException();
+         if (!custRepo.existsById(customer.getId())) {
+            throw new CustomerNotFoundException();
+        }
+        custRepo.save(company);
     }
 
 
