@@ -56,7 +56,7 @@ public class ManagerService extends ClientService implements Loginable {
          if (!custRepo.existsById(customer.getId())) {
             throw new CustomerNotFoundException();
         }
-        custRepo.save(company);
+        custRepo.save(customer);
     }
 
 
