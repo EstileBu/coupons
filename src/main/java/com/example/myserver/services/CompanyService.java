@@ -31,7 +31,7 @@ public class CompanyService extends ClientService implements Loginable{
 	
 	//=================== add method ======================\\
 	
-	public void addCoupon(Coupon coupon) throws CannotFindCouponIdOrCompanyIdException, CouponExistsException {
+	public void addCoupon(Coupon coupon) throws Exception {
 		for (Coupon coup: coupRepo.findAll()) {
 			if(coup.getTitle().equals(coupon.getTitle())) {
 				throw new CouponExistsException();
@@ -42,7 +42,7 @@ public class CompanyService extends ClientService implements Loginable{
 	
 	//=================== update method =====================\\
 	
-	public void updateCoupon(Coupon coupon) throws CannotFindCouponIdOrCompanyIdException,CouponExistsException{
+	public void updateCoupon(Coupon coupon) throws Exception{
 		for (Coupon coup : coupRepo.findAll()) {
 			if(coup.getCouponId() != coupon.getCouponId()
 					||coup.getCompany().getId() != coupon.getCompany().getId()
@@ -57,7 +57,7 @@ public class CompanyService extends ClientService implements Loginable{
 	}
 	//====================== delete method ===================\\
 	
-	public void deleteCoupon(long couponId ) throws CompanyNotFoundException,CouponNotfoundException{
+	public void deleteCoupon(long couponId ) throws Exception{
 		Company comp=compRepo.findById(companyId).orElseThrow(CompanyNotFoundException:: new);
 		Coupon coup=coupRepo.findById(couponId).orElseThrow(CouponNotfoundException:: new);
 		for (Customer cust : custRepo.findAll()) {
@@ -73,7 +73,7 @@ public class CompanyService extends ClientService implements Loginable{
 		}
 	
 	//==================== get all method ======================\\
-	public List<Coupon>getAllCompanyCoupons()throws CompanyNotFoundException,NoCouponsException{
+	public List<Coupon>getAllCompanyCoupons()throws Exception{
 		System.out.println(companyId);
 		Company comp=compRepo.findById(companyId).orElseThrow(CompanyNotFoundException:: new);
 		List<Coupon> coupons = new ArrayList<Coupon>();
@@ -90,7 +90,7 @@ public class CompanyService extends ClientService implements Loginable{
 	
 	//===================== get by methods =====================\\
 	
-	public List<Coupon> getCouponByCategory(CategoryType type)throws CompanyNotFoundException,NoCouponsByCategoryException{
+	public List<Coupon> getCouponByCategory(CategoryType type)throws Exception{
 		Company comp=compRepo.findById(companyId).orElseThrow(CompanyNotFoundException:: new);
 		List<Coupon> coupons = new ArrayList<Coupon>();
 		for (Coupon coup: comp.getCoupons()) {
@@ -103,7 +103,7 @@ public class CompanyService extends ClientService implements Loginable{
 	}
  
 	
-	public List<Coupon> getCouponUpToPrice(double price)throws CompanyNotFoundException,NoCouponsUpToPriceException{
+	public List<Coupon> getCouponUpToPrice(double price)throws Exception{
 		Company comp=compRepo.findById(companyId).orElseThrow(CompanyNotFoundException:: new);
 		List<Coupon> coupons = new ArrayList<Coupon>();
 		for (Coupon coup: comp.getCoupons()) {
@@ -119,7 +119,7 @@ public class CompanyService extends ClientService implements Loginable{
 	}
 	//==================== get company details ====================\\
 	
-	public Company getCompanyDetails() throws CompanyNotFoundException {
+	public Company getCompanyDetails() throws Exception {
 		Company comp=compRepo.findById(companyId).orElseThrow(CompanyNotFoundException:: new);
 		return comp;
 		
