@@ -2,12 +2,7 @@ package com.example.myserver.beans;
 
 import javax.persistence.*;
 import java.util.Set;
-//הערות כלליות לפרויקט: אני חושבת שמאחר ושרת הוא לולאה אינסופית כדאי להקל עליו בחלק מהבקשות ע"י המפה שכבר יצרנו לכל כניסה
-//אפשר לקשר לשם גם את הבקשות שנעשו לכניסה זו ע"י רשימה מקושרת או עץ חיפוש, ובכך להקל על חלק מהחיפושים שיהיו זמנית סטטים
 
-//בנוסף, מאחר ויכולות להיות הרבה שגיאות ועומס על האתר כשיעשה פעולות נוספות מעבר לדברים הבסיסיים שיצרנו, 
-//חשוב למיין את סוגי התגובות ב Responseentity
-// כדי שיהיה אפשר לטפל בשגיאות בצורה יעילה יותר מאוחר יותר בבנית האתר
 @Entity
 @Table(name = "companies")
 public class Company {
@@ -24,8 +19,8 @@ public class Company {
 	@Column
 	private String password;
 
-	// ERROR : @OneToMany(cascade = CascadeType.ALL)
-	@OneToMany(cascade = CascadeType.ALL)
+	
+	@OneToMany(cascade = CascadeType.REMOVE)
 
 //	@JoinTable(joinColumns = @JoinColumn(name = "id",  referencedColumnName = "company_id", table = "coupons"))
 	@JoinColumn(name = "company_id", referencedColumnName = "id")
