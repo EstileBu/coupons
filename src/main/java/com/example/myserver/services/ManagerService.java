@@ -26,7 +26,7 @@ public class ManagerService extends ClientService implements Loginable {
 
     //================ add methods ==========================\\
 
-    public void addCompany(Company company) throws CompanyExsistsException {
+    public void addCompany(Company company) throws Exception {
         Optional<Company> comp = compRepo.findByEmailAndName(company.getEmail(), company.getName());
         if (comp.isPresent()) {
             throw new CompanyExsistsException();
@@ -35,7 +35,7 @@ public class ManagerService extends ClientService implements Loginable {
     }
 
 
-    public void addCustomer(Customer customer) throws CustomerExsistsException {
+    public void addCustomer(Customer customer) throws Exception {
         Optional<Customer> cust = custRepo.findByEmail(customer.getEmail());
         if (cust.isPresent()) {
             throw new CustomerExsistsException();
