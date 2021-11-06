@@ -45,14 +45,14 @@ public class CustomerService extends ClientService implements Loginable {
 
 	// ===================== delete coupon purchase =================\\
 
-	public void deleteCouponPurchase(long couponId) throws CustomerNotFoundException, CouponPurchaseNotFoundException {
+	public void deleteCouponPurchase(long couponId) throws Exception {
 		Customer cust = custRepo.findById(customerId).orElseThrow(CustomerNotFoundException::new);
 		custRepo.deletePurchaseById(couponId, customerId);
 	}
 
 	// ====================== get all customer coupons ==================\\
 
-	public List<Coupon> getAllCustomerCoupons() throws CustomerNotFoundException, NoCustomerCouponsException {
+	public List<Coupon> getAllCustomerCoupons() throws Exception {
 		Customer cust = custRepo.findById(customerId).orElseThrow(CustomerNotFoundException::new);
 		List<Coupon> coupons = new ArrayList<Coupon>();
 		for (Coupon coup : cust.getCoupons()) {
@@ -67,7 +67,7 @@ public class CustomerService extends ClientService implements Loginable {
 	}
 	// ======================= get all coupons =====================\\
 
-	public List<Coupon> getAllCoupons() throws CustomerNotFoundException, NoCouponsException {
+	public List<Coupon> getAllCoupons() throws Exception {
 		List<Coupon> all = coupRepo.findAll();
 		all.forEach(coupon -> {
 			if (coupon.getCompany() != null)
@@ -79,7 +79,7 @@ public class CustomerService extends ClientService implements Loginable {
 	// ======================= get coupons by =========================\\
 
 	public List<Coupon> getCouponsByCategory(CategoryType type)
-			throws CustomerNotFoundException, NoCouponsByCategoryException {
+			throws Exception {
 		Customer cust = custRepo.findById(customerId).orElseThrow(CustomerNotFoundException::new);
 		List<Coupon> coupons = new ArrayList<Coupon>();
 		for (Coupon coup : cust.getCoupons()) {
@@ -95,7 +95,7 @@ public class CustomerService extends ClientService implements Loginable {
 	}
 
 	public List<Coupon> getCouponsUpToPrice(double price)
-			throws CustomerNotFoundException, NoCouponsUpToPriceException {
+			throws Exception {
 		Customer cust = custRepo.findById(customerId).orElseThrow(CustomerNotFoundException::new);
 		List<Coupon> coupons = new ArrayList<Coupon>();
 		for (Coupon coup : cust.getCoupons()) {
@@ -111,7 +111,7 @@ public class CustomerService extends ClientService implements Loginable {
 
 	// ========================== get customer details ==================\\
 
-	public Customer getCustomerDetails() throws CustomerNotFoundException {
+	public Customer getCustomerDetails() throws Exception {
 		Customer cust = custRepo.findById(customerId).orElseThrow(CustomerNotFoundException::new);
 		return cust;
 	}
