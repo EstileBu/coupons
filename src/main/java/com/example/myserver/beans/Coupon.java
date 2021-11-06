@@ -11,7 +11,6 @@ public class Coupon {
 	@Column(name = "id")
 	private long couponId;
 
-	//ERROR: @ManyToOne(cascade = CascadeType.ALL)
 	@ManyToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "company_id")
 	private Company company;
